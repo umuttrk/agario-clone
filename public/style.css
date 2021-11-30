@@ -1,21 +1,30 @@
 .container{
-    width: 1000px;
-    height: 600px;
+    width: 1500px;
+    height: 800px;
     background-color: #eee;
     margin: auto;
     overflow: hidden;
-    position: relative;
     padding: 0;
 }
 .character{
-    width: 50px;
-    height: 50px;
+    position: absolute;
+    z-index:100;
+    width: 80px;
+    height: 80px;
     background-color: #eee;
     border-radius: 100%;
-    transition: 0.1s;
+    transition: 0.4s;
     display: inline-block;   
-    margin-right: -50px;
-
-
+}
+.food{
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    z-index:5;
+    width: 20px;
+    border-radius: 100%;
+    transition: 0.4s;
+    height: 20px;
+    display: inline-block;
 }
  body{background-color: rgb(39, 31, 31);} 
