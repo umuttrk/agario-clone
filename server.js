@@ -10,7 +10,7 @@ const server = app.listen(3000, "0.0.0.0", () => {
 })
 const Food = require('./Food');
 const io = require('socket.io')(server);
-for (let index = 0; index < 200; index++) {
+for (let index = 0; index < 100; index++) {
     foods.push(new Food());
 }
 
@@ -38,10 +38,17 @@ io.sockets.on("connection", socket => {
                 console.log(element.id + " yenildi");
                 var a = onlineCircles.findIndex(e => e === circle);
                 onlineCircles[a].size += 1;
-                io.sockets.emit('remove-a-food', { element, circle });
+                
                 foods.splice(index, 1);
+                if (foods.length<90) {
+                    const food=new Food();
+                    foods.push(food);
+                    io.sockets.emit('add-a-food',food)
+                }io.emit('remove-a-food', { element, circle });
+                
                 return null;
             }
+
         });
 
         switch (command) {
