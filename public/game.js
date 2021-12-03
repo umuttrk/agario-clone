@@ -17,12 +17,8 @@ socket.on('place-all-foods', data => {
 socket.on('remove-a-food', data => {
     
     console.log(data.element.id + " gone!");
-    var food = document.getElementById(data.element.id);
-   
-    console.log(food);
-    $('#' + data.circle.id).css({ "width": data.circle.size + 1, "height": data.circle.size + 1 })
-    //  food.remove(); 
-    food.parentNode.removeChild(food);
+    $('#'+data.element.id).remove();
+    $('#' + data.circle.id).css({ "width": data.circle.size + 1, "height": data.circle.size + 1 });
 })
 socket.on('add-a-food', food => {
     $('#parent').append(' <div class="food" id=' + food.id + ' style=" transform: translate(' + food.x + 'px, ' + food.y + 'px); background-color: rgb(' + food.r + ', ' + food.g + ', ' + food.b + ');"></div>');
