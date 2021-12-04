@@ -1,7 +1,4 @@
 var onlineCircles = [];
-
-
-
 var foods = [];
 const express = require('express')
 const app = express();
@@ -27,7 +24,7 @@ io.sockets.on("connection", socket => {
         onlineCircles.push(data);
         socket.broadcast.emit('place-me-at-all-clients-screen', data);
         socket.emit('place-all-clients-to-my-screen', onlineCircles);
-        io.sockets.emit('place-all-foods', foods);
+        socket.emit('place-all-foods', foods);
     })
 
 
@@ -37,18 +34,19 @@ io.sockets.on("connection", socket => {
             if (element.x < circle.x + circle.size && element.x > circle.x && element.y < circle.y + circle.size && element.y > circle.y) {
                 console.log(element.id + " yenildi");
                 var a = onlineCircles.findIndex(e => e === circle);
-                onlineCircles[a].size += 1;
-                
                 foods.splice(index, 1);
-                if (foods.length<90) {
-                    const food=new Food();
+                if (foods.length < 90) {
+                    const food = new Food();
                     foods.push(food);
-                    io.sockets.emit('add-a-food',food)
-                }io.emit('remove-a-food', { element, circle });
-                
+                    io.sockets.emit('add-a-food', food)
+                } if (circle.size < 800) {
+                    onlineCircles[a].size += 1;
+                    io.emit('remove-a-food', { element, circle });
+                } else {
+                    io.sockets.emit('game-finished', circle)
+                }
                 return null;
             }
-
         });
 
         switch (command) {
@@ -67,7 +65,6 @@ io.sockets.on("connection", socket => {
         }
         io.sockets.emit('move-at-all', circle);
         // io.sockets.emit('remove-a-food', eatenFood);
-
     })
     socket.on('disconnect', () => {
         console.log("a client disconnected");

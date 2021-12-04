@@ -10,8 +10,14 @@
     position: absolute;
     z-index:100;
     border-radius: 100%;
-    /* transition: 1s; */
+    /* transition: 0.2s all; */
     display: inline-block;   
+    text-align: center;
+    vertical-align: middle;
+}
+.character p{
+    top: 50%;
+  left: 50%;
 }
 .food{
     position: absolute;
@@ -25,3 +31,8 @@
     display: inline-block;
 }
  body{background-color: rgb(39, 31, 31);} 
+
+ #point{
+     margin: 0;
+     padding: 0;
+ }
