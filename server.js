@@ -17,7 +17,6 @@ const getCircle = (socketId) => onlineCircles.find((e, i) => {
 });
 
 io.sockets.on("connection", socket => {
-
     console.log("a client connected");
     socket.on('add-me-as-player', data => {
         data.socketId = socket.id;
@@ -26,7 +25,6 @@ io.sockets.on("connection", socket => {
         socket.emit('place-all-clients-to-my-screen', onlineCircles);
         socket.emit('place-all-foods', foods);
     })
-
 
     socket.on('move-command-triggered', command => {
         const circle = getCircle(socket.id);
@@ -41,7 +39,7 @@ io.sockets.on("connection", socket => {
                     io.sockets.emit('add-a-food', food)
                 } if (circle.size < 800) {
                     onlineCircles[a].size += 1;
-                    io.emit('remove-a-food', { element, circle });
+                    socket.emit('remove-a-food', { element, circle });
                 } else {
                     io.sockets.emit('game-finished', circle)
                 }
@@ -64,7 +62,6 @@ io.sockets.on("connection", socket => {
                 break;
         }
         io.sockets.emit('move-at-all', circle);
-        // io.sockets.emit('remove-a-food', eatenFood);
     })
     socket.on('disconnect', () => {
         console.log("a client disconnected");

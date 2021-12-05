@@ -44,12 +44,10 @@ socket.on('move-at-all', (data) => {
 })
 socket.on('game-finished', data => {
     alert(data.name + " won!")
-
     location.reload()
 })
 
 document.onkeydown = check_key;
-//basılı tutma, iki tuşa aynı anda basma gibi özellikler
 function check_key(e) {
     e = e || window.event;
     let command = ""
