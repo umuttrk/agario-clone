@@ -3,6 +3,7 @@ var socket;
 $(document).ready(() => {
     const promise=new Promise((resolve,reject)=>{
         resolve(prompt("Please enter your name", "Harry Potter"))
+        reject('')
     })
     //let person = prompt("Please enter your name", "Harry Potter");
     promise.then(person=>{
@@ -20,7 +21,7 @@ $(document).ready(() => {
             console.log(data.element.id + " gone!");
             var food = document.getElementById(data.element.id);
         
-            $('#' + data.circle.id).css({ "width": data.circle.size + 5, "height": data.circle.size + 5 })
+            $('#' + data.circle.id).css({ "width": data.circle.size + 1, "height": data.circle.size + 1 })
            
             
             food.remove();

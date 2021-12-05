@@ -38,7 +38,7 @@ io.sockets.on("connection", socket => {
                     foods.push(food);
                     io.sockets.emit('add-a-food', food)
                 } if (circle.size < 800) {
-                    onlineCircles[a].size += 5;
+                    onlineCircles[a].size += 1;
                     io.emit('remove-a-food', { element, circle });
                     socket.emit('increase-point', circle );
                 } else {
