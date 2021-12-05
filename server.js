@@ -30,7 +30,7 @@ io.sockets.on("connection", socket => {
         const circle = getCircle(socket.id);
         foods.forEach((element, index) => {
             if (element.x < circle.x + circle.size && element.x > circle.x && element.y < circle.y + circle.size && element.y > circle.y) {
-                console.log(element.id + " yenildi");
+                console.log(element.id + " has eaten");
                 var a = onlineCircles.findIndex(e => e === circle);
                 foods.splice(index, 1);
                 if (foods.length < 90) {
